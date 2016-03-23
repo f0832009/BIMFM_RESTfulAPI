@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amaze UI React</title>
+  <meta name="renderer" content="webkit">
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="alternate icon" type="image/png" href="i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="AMUI React"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.5.0/css/amazeui.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.4.4/babel.min.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        // tt();
+        // console.log(output.code);
+        // var data = [{
+        //     "name": "HTPC",
+        //     "parent": null,
+        //     "layers": [{
+        //         "name": "AR",
+        //         "modelPath": "./testData/AR/1.txt"
+        //     },{
+        //         "name": "STR",
+        //         "modelPath": "./testData/STR/1.txt"
+        //     }]                
+        var data = '';
+        $.getJSON('./json/Data.json', function(data) {            
+            var jData = JSON.stringify(data);            
+            $.ajax({
+                contentType: 'application/json',
+                url: '/Spaces',
+                type: 'POST',
+                data: jData
+            });
+        });
+
+        
+        // var jData = JSON.stringify(data);
+        // console.log(data);
+        
+        // var find = $.ajax({
+        //     // dataType: "json",
+        //     url:'/test/test',
+        //     type: 'GET',
+        //     success :function(data){
+        //         console.log(data);
+        //         jdata = data;
+        //     }});
+
+        
+        // $.ajax({
+        //     contentType: 'application/json',
+        //     url: '/Facilities',
+        //     type: 'POST',
+        //     data: jData
+        // });
+        // load('ui');
+        // console.log(load);
+        // ReactDOM.render(buttonsInstance, document.getElementById('ui'));
+    })
+  </script>
+</head>
+<body>
+<div id='ui'></div>
+    
+</body>
+</html>
