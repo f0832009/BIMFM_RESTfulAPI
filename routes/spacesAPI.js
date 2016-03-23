@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var express = require('express');
-var Space = require('../models/resources_tree');
+var Space = require('../models/spaces');
 
 module.exports = function(){
     var router = express.Router();

@@ -5,8 +5,8 @@ var mongoose = require('mongoose');
 var PropertySchema = new mongoose.Schema({    
     name: String,    
     type: String,
-    group: 
-    properties: []
+    value: 
+    //properties: []
 })
 
 // CategorySchema.plugin(materializedPlugin);
