@@ -1,3 +1,4 @@
+var restful = require('node-restful');
 var mongoose = require('mongoose');
 var materializedPlugin = require('mongoose-materialized');
 var featureSchema = require('./features');
@@ -9,8 +10,7 @@ var CategorySchema = new Schema({
     features: [{ type: Schema.Types.ObjectId, ref: 'Feature'}]
 })
 
-CategorySchema.plugin(materializedPlugin);
-mongoose.model('Category', CategorySchema);
-var model = mongoose.model('Category');
+// CategorySchema.plugin(materializedPlugin);
+var model = restful.model('Category', CategorySchema);
 
 module.exports = model;

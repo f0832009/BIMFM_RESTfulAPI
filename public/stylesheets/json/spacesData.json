@@ -1,0 +1,26 @@
+[{
+    "name": "HTPC",
+    "modelPath": "",
+    "remark": ""
+    
+},{
+    "name": "1F",
+    "modelPath": "./data/1f",
+    "remark": "",
+    "parent": "HTPC"    
+},{
+    "name": "2F",
+    "modelPath": "./data/2f",
+    "remark": "",
+    "parent": "HTPC"        
+},{
+    "name": "AR",
+    "modelPath": "./data/1F/AR",
+    "remark": "",
+    "parent": "1F"       
+},{
+    "name": "STR",
+    "modelPath": "./data/1F/STR",
+    "remark": "",
+    "parent": "1F"  
+}]

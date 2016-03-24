@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
-// var materializedPlugin = require('mongoose-materialized');
+var materializedPlugin = require('mongoose-materialized');
 // var Schema = mongoose.Schema;
+var Property = require('./property');
 
 var FeaturesSchema = new mongoose.Schema({    
     name: String,    
     remark: String,
-    properties: []
+    properties: [Property.Schema]
 })
 
 // CategorySchema.plugin(materializedPlugin);

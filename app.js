@@ -11,8 +11,10 @@ var dbConnector = require('./models/dbConnector')
 var routes = require('./routes/index');
 var users = require('./routes/users');
 // var resourcesAPI = require('./routes/resourcesAPI');
+var featuresAPI = require('./routes/featuresAPI');
 var facilitiesAPI = require('./routes/facilitiesAPI');
-var SpacesAPI = require('./routes/SpacesAPI');
+var spacesAPI = require('./routes/spacesAPI');
+var categoryAPI = require('./routes/categoryAPI');
 
 var app = express();
 
@@ -40,7 +42,7 @@ connector.initializeDb(function(){
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.post('/', function(res, req, next){
+app.get('/', function(res, req, next){
     req.on('data', function(data){
         body += data;
         console.log('data update!!');
@@ -60,15 +62,23 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressValidator());
 
-app.use('/Spaces', SpacesAPI());
+
+// var cacheOpts = {
+//     max:50,
+//     maxAge:1000*60*2
+// };
+// require('mongoose-cache').install(mongoose, cacheOpts)
+
+app.use('/Spaces', spacesAPI());
 app.use('/Facilities', facilitiesAPI());
+app.use('/Features', featuresAPI());
 app.use('/', routes);
 app.use('/users', users);
-
+categoryAPI(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
