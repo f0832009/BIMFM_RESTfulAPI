@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var express = require('express');
+var os = require('os');
 var Space = require('../models/spaces');
 var validator = require('express-validator');
 var util = require('util');
@@ -48,20 +49,17 @@ module.exports = function(){
     })
     
     //query rule: childType
-    router.get('/', function(req, res){
+    router.get('/children', function(req, res){
         req.assert('childType', 'error query').notEmpty();
+        
         var errors = req.validationErrors();
         if (errors) {
-            res.send('There have been validation errors: ' + util.inspect(errors), 400);
+            res.end('There have been validation errors: ' + util.inspect(errors), 400);
             return;
-        }        
+        }                
+        var childType = req.query.childType;        
         
-        var childType = req.query.childType;
-        var result = '';
-        // res.locals.doc.getChildren({
         Space.find({
-            // condition: { childType: childType },
-            // fields: { childType: 0 },         
             childType: childType               
         },function(err,docs){
             if(err) return console.error(err);  
@@ -71,7 +69,6 @@ module.exports = function(){
                 Space.find({ path: regPath }).exec(function(err, docs){
                     if(err) return console.error(err);      
                     // res.write(JSON.stringify(docs));
-                    // res.write('');
                     callback(null, docs);                    
                 })
             }, function(err, result){
@@ -81,8 +78,92 @@ module.exports = function(){
         })         
     })
     
-    router.get('/node/:nodeId', function(req, res){
+    router.get('/children/:nodeId', function(req, res){        
+        var id = mongoose.Types.ObjectId(req.params.nodeId);
+
+        req.assert('limit', 'limit error').optional().isInt();
+        var errors = req.validationErrors();
+        if (errors) {
+            res.end('There have been validation errors: ' + util.inspect(errors), 400);
+            return;
+        }       
         
+        var limit = parseInt(req.query.limit)  
+        Space.findOne({ _id: id }).exec().then(function(doc){            
+            if(limit){
+                doc.getDescendants({
+                    limit: limit
+                }).then(function(docs){
+                    res.end(JSON.stringify(docs));
+                })
+            }
+            else{
+                doc.getChildren().then(function(docs){
+                    res.end(JSON.stringify(docs));
+                })
+            }
+        })
+    })
+    
+    router.get('/resourcePaths/:nodeId', function(req, res){        
+        var id = mongoose.Types.ObjectId(req.params.nodeId);
+
+        req.assert('limit', 'limit error').optional().isInt();
+        var errors = req.validationErrors();
+        if (errors) {
+            res.end('There have been validation errors: ' + util.inspect(errors), 400);
+            return;
+        }       
+        
+        var interfaces = os.networkInterfaces();
+        var addresses = '';
+        for (var i in interfaces) {
+            for (var j in interfaces[i]) {
+                var address = interfaces[i][j];
+                if (address.family === 'IPv4' && !address.internal) {
+                    // addresses.push(address.address);
+                    addresses = address.address;
+                }
+            }
+        }
+        
+        var limit = parseInt(req.query.limit)  
+        Space.findOne({ _id: id }).exec().then(function(doc){            
+            if(limit){
+                doc.getDescendants({
+                    limit: limit,
+                    fields: { resourcePath: 1, _id : 0 }
+                }).then(function(docs){
+                    async.map(docs, function(doc, callback){
+                        var replaced = doc.resourcePath.replace('.', addresses)
+                        callback(null, replaced)
+                    },function(err, result){
+                        res.end(JSON.stringify(result));
+                    })                    
+                })
+            }
+            else{
+                doc.getChildren({
+                    fields: { resourcePath: 1, _id : 0 }
+                }).then(function(docs){
+                    async.map(docs, function(doc, callback){
+                        var replaced = doc.resourcePath.replace('.', addresses)
+                        callback(null, replaced)
+                    },function(err, result){
+                        res.end(JSON.stringify(result));
+                    })    
+                })
+            }
+        })
+    })
+    
+    router.get('/roots', function(req, res){
+        Space.GetRoots().then(function(roots){
+            res.end(JSON.stringify(roots));
+        })
+    })
+    
+    router.get('/node/:nodeId', function(req, res){        
         var id = mongoose.Types.ObjectId(req.params.nodeId);
         Space.findOne({ _id: id }).exec().then(function(doc){
             res.end(JSON.stringify(doc));
@@ -90,12 +171,6 @@ module.exports = function(){
     })
     
     router.get('/treeJsonData', function(req, res){
-        // Space.findOne({parentId: null}).exec(function(err, doc){
-        //     if(err) return console.error(err);
-        //     doc.getTree().then(function(err, tree){
-        //         res.end(JSON.stringify(tree));
-        //     })
-        // })
         Space.GetFullTree().then(function(tree){
             res.end(JSON.stringify(tree));
         })        
@@ -116,6 +191,7 @@ module.exports = function(){
         })        
     })
     
+    //just for test
     router.get('/test', function(req, res){     
         req.assert('limit', 'error query').notEmpty().isInt();
         req.assert('skip', 'error query').notEmpty().isInt();
@@ -137,13 +213,6 @@ module.exports = function(){
     
     //query materilzedPath
     router.get('/path/:path', function(req, res){     
-        // req.assert('limit', 'error query').notEmpty().isInt();
-        // req.assert('skip', 'error query').notEmpty().isInt();
-        // var errors = req.validationErrors();
-        // if (errors) {
-        //     res.send('There have been validation errors: ' + util.inspect(errors), 400);
-        //     return;
-        // }        
         var regPath = new RegExp(',' + req.params.path);
                 
         Space.find({ path: regPath }).exec(function(err, docs){
@@ -153,7 +222,7 @@ module.exports = function(){
     })   
     
     //get all childtype
-    router.get('/childType', function(req, res, next){        
+    router.get('/childTypes', function(req, res, next){        
         Space.find({childType: { $exists: true }}).distinct('childType').exec(function(err, docs){
             if(err) return console.error(err);   
                

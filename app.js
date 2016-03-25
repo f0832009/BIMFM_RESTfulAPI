@@ -15,6 +15,7 @@ var featuresAPI = require('./routes/featuresAPI');
 var facilitiesAPI = require('./routes/facilitiesAPI');
 var spacesAPI = require('./routes/spacesAPI');
 var categoryAPI = require('./routes/categoryAPI');
+var STRColumnAPI = require('./routes/STRColumnAPI');
 
 var app = express();
 
@@ -23,8 +24,6 @@ var connector = new dbConnector(mongo_config);
 connector.initializeDb(function(){
     // check
 })
-
-
 
 // var admin = express();
 // admin.on('mount', function (parent) {
@@ -60,7 +59,8 @@ app.get('/', function(res, req, next){
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
+// app.use(bodyParser({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
@@ -74,12 +74,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // require('mongoose-cache').install(mongoose, cacheOpts)
 
 app.use('/Spaces', spacesAPI());
-app.use('/Facilities', facilitiesAPI());
 app.use('/Features', featuresAPI());
 app.use('/', routes);
 app.use('/users', users);
 categoryAPI(app);
-
+facilitiesAPI(app);
+STRColumnAPI(app)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

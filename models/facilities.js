@@ -1,21 +1,14 @@
+var restful = require('node-restful');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var facilitiesSchema = new Schema({
+var FacilitiesSchema = new Schema({
     name: String,
     fsc: Number,
-    element: [{
-        uid: Number,
-        fm_id: Number,
-        name: String,
-        resource_id:{
-            type: Schema.Types.ObjectId,
-            ref: 'Resources'
-        }
-    }]    
+    table: String,
+    remark: String
 })
 
-mongoose.model('Facilities', facilitiesSchema);
-var facilities = mongoose.model('Facilities');
+var model = restful.model('Facility', FacilitiesSchema);
 
-module.export = facilities;
+module.exports = model;

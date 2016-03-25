@@ -1,6 +1,6 @@
 var restful = require('node-restful');
 var mongoose = require('mongoose');
-var materializedPlugin = require('mongoose-materialized');
+// var materializedPlugin = require('mongoose-materialized');
 var featureSchema = require('./features');
 var Schema = mongoose.Schema;
 

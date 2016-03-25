@@ -1,15 +1,25 @@
 [{
     "name": "日常維護",
     "remark": ".",
-    "properties": [{
-        "name": "紀錄",
-        "type": "string"
+    "propertydefinitions": [{
+        "name": "每日紀錄",
+        "type": "String"
+    },{
+        "name": "負責人",
+        "type": "String"
     }]
 },{
-    "name": "通用",
+    "name": "識別",
     "remark": "..",
-    "properties": [{
-        "name": "名字",
-        "type": "string"
+    "propertydefinitions": [{
+        "name": "QRCode",
+        "type": "Buffer"
     }]    
+},{
+    "name": "資產",
+    "remark": "",
+    "propertydefinitions": [{
+        "name": "資產編號",
+        "type": "Number"
+    }]
 }]
