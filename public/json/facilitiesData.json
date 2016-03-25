@@ -1,0 +1,212 @@
+[
+  {
+    "name":"Mechanical Equipment",
+    "fsc":301,
+    "table":"MechanicalEquipment",
+    "remark":""
+  },
+  {
+    "name":"Duct Fittings",
+    "fsc":302,
+    "table":"DuctFittings",
+    "remark":""
+  },
+  {
+    "name":"Ducts",
+    "fsc":303,
+    "table":"Ducts",
+    "remark":""
+  },
+  {
+    "name":"Pipes",
+    "fsc":304,
+    "table":"Pipes",
+    "remark":""
+  },
+  {
+    "name":"Pipe Fittings",
+    "fsc":305,
+    "table":"PipeFittings",
+    "remark":""
+  },
+  {
+    "name":"Cable Tray Fittings",
+    "fsc":306,
+    "table":"CableTrayFittings",
+    "remark":""
+  },
+  {
+    "name":"Cable Trays",
+    "fsc":307,
+    "table":"CableTrays",
+    "remark":""
+  },
+  {
+    "name":"Sprinklers",
+    "fsc":308,
+    "table":"Sprinklers",
+    "remark":""
+  },
+  {
+    "name":"Landscape Floors",
+    "fsc":501,
+    "table":"LandscapeFloors",
+    "remark":""
+  },
+  {
+    "name":"Landscape Planting",
+    "fsc":502,
+    "table":"LandscapePlanting",
+    "remark":""
+  },
+  {
+    "name":"Specialty Equipment",
+    "fsc":401,
+    "table":"SpecialtyEquipment",
+    "remark":""
+  },
+  {
+    "name":"STR Floors",
+    "fsc":202,
+    "table":"Floors",
+    "remark":""
+  },
+  {
+    "name":"STR Walls",
+    "fsc":205,
+    "table":"STRWalls",
+    "remark":""
+  },
+  {
+    "name":"STR Structural Columns",
+    "fsc":201,
+    "table":"STRColumns",
+    "remark":""
+  },
+  {
+    "name":"Structural Framing",
+    "fsc":204,
+    "table":"StructuralFraming",
+    "remark":""
+  },
+  {
+    "name":"Structural Foundations",
+    "fsc":206,
+    "table":"StructuralFoundations",
+    "remark":""
+  },
+  {
+    "name":"STR Generic Models",
+    "fsc":207,
+    "table":"STRGenericModels",
+    "remark":""
+  },
+  {
+    "name":"Doors",
+    "fsc":105,
+    "table":"Doors",
+    "remark":""
+  },
+  {
+    "name":"AR Floors",
+    "fsc":107,
+    "table":"ARFloors",
+    "remark":""
+  },
+  {
+    "name":"AR Generic Models",
+    "fsc":110,
+    "table":"GenericModels",
+    "remark":""
+  },
+  {
+    "name":"Railings",
+    "fsc":111,
+    "table":"Railings",
+    "remark":""
+  },
+  {
+    "name":"Stairs",
+    "fsc":114,
+    "table":"Stairs",
+    "remark":""
+  },
+  {
+    "name":"AR Walls",
+    "fsc":116,
+    "table":"ARWalls",
+    "remark":""
+  },
+  {
+    "name":"Windows",
+    "fsc":117,
+    "table":"Windows",
+    "remark":""
+  },
+  {
+    "name":"Ceilings",
+    "fsc":120,
+    "table":"Ceilings",
+    "remark":""
+  },
+  {
+    "name":"AR Columns",
+    "fsc":121,
+    "table":"ARColumns",
+    "remark":""
+  },
+  {
+    "name":"Curtain Panels",
+    "fsc":122,
+    "table":"CurtainPanels",
+    "remark":""
+  },
+  {
+    "name":"AR Furniture",
+    "fsc":123,
+    "table":"ARFurniture",
+    "remark":""
+  },
+  {
+    "name":"Curtain Wall Mullions",
+    "fsc":124,
+    "table":"CurtainWallMullions",
+    "remark":""
+  },
+  {
+    "name":"AR Furniture Systems",
+    "fsc":125,
+    "table":"ARFurnitureSystems",
+    "remark":""
+  },
+  {
+    "name":"Parking",
+    "fsc":126,
+    "table":"Parking",
+    "remark":""
+  },
+  {
+    "name":"Planting",
+    "fsc":127,
+    "table":"Planting",
+    "remark":""
+  },
+  {
+    "name":"AR Slab Edges",
+    "fsc":128,
+    "table":"ARSlabEdges",
+    "remark":""
+  },
+  {
+    "name":"Furniture",
+    "fsc":601,
+    "table":"Furniture",
+    "remark":""
+  },
+  {
+    "name":"Furniture Systems",
+    "fsc":602,
+    "table":"FurnitureSystems",
+    "remark":""
+  }
+]

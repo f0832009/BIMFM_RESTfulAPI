@@ -3,8 +3,7 @@ var materializedPlugin = require('mongoose-materialized');
 var Schema = mongoose.Schema;
 
 var SpaceResourcesSchema = new Schema({    
-    name: String,
-    
+    name: String,    
     remark: String
 })
 

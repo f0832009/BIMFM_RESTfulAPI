@@ -1,25 +1,26 @@
 var mongoose = require('mongoose');
-var express = require('express');
-var Facilities = require('../models/facilities');
+var Facility = require('../models/facilities');
+var async = require('async');
 
-module.exports = function(){
-    var router = express.Router();
+module.exports = function(app){    
+    Facility.methods(['get', 'post', 'put', 'delete']);
     
-    router.post('/', function(req, res){
-        var body = '';        
-        if(req.body){
-            
-        }        
-        res.end('vv');
+    Facility.before('get', function(req, res, next){
+        req.query.limit = parseInt(req.query.limit);
+        next();
     })
     
-    router.get('/', function(req, res){               
-        res.end('get');        
-    })
-    
-    router.get('/:id', function(req, res){
-        
-    })
-    
-    return router;
+    Facility.route('upload.post', function(req, res, next) {
+        async.each(req.body, function(item, callback){
+            var facility = new Facility(item);
+            facility.save().then(function(doc){                
+                callback(null);
+            })               
+        }, function(err){
+            if(err) console.error(err);
+            res.end('upload success');
+        })
+    }); 
+    Facility.register(app, '/facilities');    
 }
+

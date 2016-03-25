@@ -1,0 +1,35 @@
+{
+    "name": "HTPC",
+    "resourcePath": "",
+    "remark": "",
+    "childType": "Levels",
+    "children": [{
+        "name": "1F",
+        "resourcePath": "./data/1F",
+        "remark": "",       
+        "childType": "Layers",
+        "children":[{
+            "name": "AR",
+            "resourcePath": "./data/1F/AR",
+            "remark": ""       
+        },{
+            "name": "STR",
+            "resourcePath": "./data/1F/STR",
+            "remark": ""            
+        }]
+    },{
+        "name": "2F",
+        "resourcePath": "./data/2F",
+        "remark": "",   
+        "childType": "Layers",
+        "children": [{
+            "name": "AR",
+            "resourcePath": "./data/2F/AR",
+            "remark": ""
+        },{
+            "name": "MEP",
+            "resourcePath": "./data/2F/MEP",
+            "remark": ""
+        }]    
+    }]    
+}
